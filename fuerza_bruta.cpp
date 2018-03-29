@@ -3,11 +3,7 @@ using namespace std;
 #include <iostream>
 #include <cstring>
 #include <vector>
-
-struct item {
-	int peso;
-	int valor;
-};
+#include "utils.h"
 
 
 // void print_valores_elegidos(int cant_items, item items[], bool mejor[]) {
@@ -19,17 +15,17 @@ struct item {
 // 	}
 // }
 
-int valor_de_items(int cant_items, item items[], bool puestos[]) {
+int valor_de_items(int cant_items, vector<item> items, bool puestos[]) {
 	int valor = 0;
 	for (int i = 0; i < cant_items; i++) {
 		if (puestos[i]) {
-			valor += items[i].valor;	
+			valor += items[i].valor;
 		}
 	}
 	return valor;
 }
 
-int peso_de_items(int cant_items, item items[], bool puestos[]) {
+int peso_de_items(int cant_items, vector<item> items, bool puestos[]) {
 	int peso = 0;
 	for (int i = 0; i < cant_items; i++) {
 		if (puestos[i]) {
@@ -44,7 +40,7 @@ int peso_de_items(int cant_items, item items[], bool puestos[]) {
  * solucion que la anterior. Devuelve el nuevo mejor valor.  
  */
 int mejor_solucion(int capacidad, int cant_items,
-	item items[], int valor_anterior,
+	vector<item> items, int valor_anterior,
 	bool sol_actual[]) {
 
 	int valor_actual =
@@ -82,7 +78,7 @@ bool proxima_combinacion(int cant_items, bool items_actuales[]) {
 	return true;
 }
 
-int fuerza_bruta(int capacidad, int cant_items, item items[]) {
+int fuerza_bruta(int capacidad, int cant_items, vector<item> items) {
 	// decidiremos para cada objeto si va o no.
 	// eso lo podemos hacer con un vector de objetos,
 	// o con un array que te diga si esta o no.
@@ -112,13 +108,7 @@ int fuerza_bruta(int capacidad, int cant_items, item items[]) {
 
 int main() {
 	int capacidad, cant_items;
-	cin >> cant_items >> capacidad;
-
-	item items[cant_items];
-	for (int i = 0; i < cant_items; i++) {
-		cin >> items[i].peso >> items[i].valor;
-	}
-    
+	vector<item> items = parsear_entrada(&capacidad, &cant_items);
     int solucion = fuerza_bruta(capacidad, cant_items, items);
 
     cout << solucion << endl;
