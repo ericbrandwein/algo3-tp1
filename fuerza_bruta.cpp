@@ -88,8 +88,6 @@ int fuerza_bruta(int capacidad, int cant_items, vector<item> items) {
 
 	// array que te dice si cada objeto esta o no esta en la 
 	// solucion parcial actual.
-	// usamos los arrays de c++11 porque se copian solos cuando 
-	// los retornas. 
 	bool items_actuales[cant_items];
 	for (int i = 0; i < cant_items; i++) {
 		items_actuales[i] = false;
