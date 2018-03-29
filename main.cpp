@@ -40,22 +40,21 @@ int peso_de_items(int cant_items, item items[], bool puestos[]) {
 }
 
 /**
- * Cambia los valores de sol_anterior para que tenga la mejor
- * solucion entre sol_anterior y sol_actual.
+ * Calcula el valor de la sol_actual, y se fija si es mejor 
+ * solucion que la anterior. Devuelve el nuevo mejor valor.  
  */
-void mejor_solucion(int capacidad, int cant_items,
-	item items[], bool sol_anterior[],
+int mejor_solucion(int capacidad, int cant_items,
+	item items[], int valor_anterior,
 	bool sol_actual[]) {
 
-	int valor_anterior =
-		valor_de_items(cant_items, items, sol_anterior);
 	int valor_actual =
 		valor_de_items(cant_items, items, sol_actual);
 	int peso_actual = peso_de_items(cant_items, items, sol_actual);
 
 	if (peso_actual <= capacidad && valor_anterior < valor_actual) {
-		memcpy(sol_anterior, sol_actual, sizeof(bool) * cant_items);
+		return valor_actual;
 	}
+	return valor_anterior;
 }
 
 
@@ -96,22 +95,19 @@ int fuerza_bruta(int capacidad, int cant_items, item items[]) {
 	// usamos los arrays de c++11 porque se copian solos cuando 
 	// los retornas. 
 	bool items_actuales[cant_items];
-	bool mejor[cant_items];
 	for (int i = 0; i < cant_items; i++) {
 		items_actuales[i] = false;
-		mejor[i] = false;
 	}
+	int mejor = 0;
 
 	bool termino = false;
 	while (!termino) {
-		mejor_solucion(
+		mejor = mejor_solucion(
 			capacidad, cant_items, items, mejor, items_actuales);
 		termino = proxima_combinacion(cant_items, items_actuales);
 	}
 
-	// Calculamos el valor de los items.
-	//print_valores_elegidos(cant_items, items, mejor);
-	return valor_de_items(cant_items, items, mejor);
+	return mejor;
 }
 
 int main() {
