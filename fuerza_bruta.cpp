@@ -5,16 +5,6 @@ using namespace std;
 #include <vector>
 #include "utils.h"
 
-
-// void print_valores_elegidos(int cant_items, item items[], bool mejor[]) {
-// 	cout << endl;
-// 	for (int i = 0; i < cant_items; i++) {
-// 		if (mejor[i]) {
-// 			cout << items[i].peso << " " << items[i].valor << endl;
-// 		}
-// 	}
-// }
-
 int valor_de_items(int cant_items, vector<item> items, bool puestos[]) {
 	int valor = 0;
 	for (int i = 0; i < cant_items; i++) {

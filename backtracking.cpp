@@ -5,6 +5,14 @@ using namespace std;
 #include <vector>
 #include "utils.h"
 
+
+// void print_items(vector<item> items) {
+// 	cout << endl;
+// 	for (int i = 0; i < items.size(); i++) {
+// 		cout << items[i].peso << " " << items[i].valor << endl;
+// 	}
+// }
+
 /**
 Calcula la proxima solucion, empezando desde la posicion pasada.
 */
@@ -31,7 +39,7 @@ void solucion_desde(int capacidad, vector<item> items,
 
 /**
 Setea en items_actuales la proxima combinacion de items que
-podria ser una solucion. 
+podria ser una solucion.
 
 Devuelve false si los items_actuales ya constituyen la ultima solucion.
 */
@@ -42,7 +50,7 @@ bool proxima_solucion(int capacidad, vector<item> items,
 	int peso = *peso_actual;
 	int posicion_actual;
 	// Encontramos el ultimo que sea verdadero
-	for (posicion_actual = items.size() - 1; 
+	for (posicion_actual = items.size() - 1;
 		posicion_actual >= 0 && !items_actuales[posicion_actual];
 		posicion_actual--);
 
@@ -60,8 +68,15 @@ bool proxima_solucion(int capacidad, vector<item> items,
 	return true;
 }
 
+bool comparar_por_ratio(item i, item j) {
+	return (double) i.valor / (double) i.peso >
+		(double) j.valor / (double) j.peso;
+}
+
 int backtracking(int capacidad, vector<item> items) {
-	// Decidiremos para cada objeto si va o no
+	// Ordenamos primero los items por valor / peso
+	sort(items.begin(), items.end(), comparar_por_ratio);
+
 	bool items_actuales[items.size()];
 	int mejor = 0;
 	int valor_actual = 0;
