@@ -1,4 +1,5 @@
-
+backtracking: backtracking.cpp utils.o
+	g++ backtracking.cpp utils.o -std=c++11 -o backtracking
 
 fuerza_bruta: fuerza_bruta.cpp utils.o
 	g++ fuerza_bruta.cpp utils.o -std=c++11 -o fuerza_bruta
@@ -8,4 +9,5 @@ utils.o: utils.cpp
 
 clean:
 	rm fuerza_bruta
+	rm backtracking
 	rm utils.o
