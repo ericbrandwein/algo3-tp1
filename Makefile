@@ -4,7 +4,7 @@ utils.o: utils.cpp
 	g++ utils.cpp -c -o utils.o
 
 %: %.cpp utils.o
-	g++ $< utils.o -std=c++11 -o $@
+	g++ -g $< utils.o -std=c++11 -o $@
 
 clean:
 	rm fuerza_bruta
