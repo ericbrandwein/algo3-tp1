@@ -1,17 +1,14 @@
-meet_in_the_middle: meet_in_the_middle.cpp utils.o
-	g++ meet_in_the_middle.cpp utils.o -std=c++11 -o meet_in_the_middle
-
-backtracking: backtracking.cpp utils.o
-	g++ backtracking.cpp utils.o -std=c++11 -o backtracking
-
-fuerza_bruta: fuerza_bruta.cpp utils.o
-	g++ fuerza_bruta.cpp utils.o -std=c++11 -o fuerza_bruta
+all: fuerza_bruta meet_in_the_middle backtracking dinamica
 
 utils.o: utils.cpp
 	g++ utils.cpp -c -o utils.o
 
+%: %.cpp utils.o
+	g++ $< utils.o -std=c++11 -o $@
+
 clean:
 	rm fuerza_bruta
-	rm backtracking
 	rm meet_in_the_middle
+	rm backtracking
+	rm dinamica
 	rm utils.o
