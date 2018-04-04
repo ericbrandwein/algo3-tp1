@@ -1,0 +1,35 @@
+\documentclass[10pt, a4paper]{article}
+%\usepackage[utf8]{inputenc}
+% especifico márgenes manualmente
+\usepackage[paper=a4paper, left=1.5cm, right=1.5cm, bottom=1.5cm, top=3.5cm]{geometry}
+% codificación ISO-8859-1
+%\usepackage[latin1]{inputenc}
+% separación silábica en castellano
+\usepackage[spanish]{babel}
+\usepackage{framed}
+
+
+\title{Trabajo Pr\'actico 1}
+\author{Eric Brandwein}
+\date{Abril 2018}
+
+\begin{document}
+
+\maketitle
+
+% compilar 2 veces para actualizar las referencias
+\tableofcontents
+
+\pagebreak
+%\newpage
+
+
+\section{Descripci\'on del problema}
+
+%\begin{framed}
+El problema a resolver en este informe será el ya conocido problema de la mochila, o "Knapsack problem", en inglés. Su enunciado dice así: \\
+Dado un conjunto de $n$ ítems $S$, cada uno con un tamaño asociado $w_i$ y un beneficio asociado $p_i$, y una mochiula con una capacidad asociada $W$, encontrar el subconjjunto de ítems de $S$ que maximice el beneficio total sin exceder la capacidad de la mochila. Es decir, encontrar $R \subseteq S$ tal que $\sum_{i \in R} p_i$ sea máxima y se cumpla $\sum_{i \in R} w_i \leq W$. \\
+
+%\end{framed}
+
+\end{document}
