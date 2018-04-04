@@ -1,2 +1,2 @@
 informe: informe.tex
-	pandoc -o informe.pdf informe.tex
+	pandoc -V geometry:margin=1in -o informe.pdf informe.tex
