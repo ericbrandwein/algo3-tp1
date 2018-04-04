@@ -1,13 +1,14 @@
 \documentclass[10pt, a4paper]{article}
 %\usepackage[utf8]{inputenc}
 % especifico márgenes manualmente
-\usepackage[paper=a4paper, left=1.5cm, right=1.5cm, bottom=1.5cm, top=3.5cm]{geometry}
+\usepackage[paper=a4paper]{geometry}
 % codificación ISO-8859-1
 %\usepackage[latin1]{inputenc}
 % separación silábica en castellano
 \usepackage[spanish]{babel}
-\usepackage{framed}
-
+%\usepackage{framed}
+%\usepackage{array}
+%\usepackage{tabular}
 
 \title{Trabajo Pr\'actico 1}
 \author{Eric Brandwein}
@@ -28,8 +29,20 @@
 
 %\begin{framed}
 El problema a resolver en este informe será el ya conocido problema de la mochila, o "Knapsack problem", en inglés. Su enunciado dice así: \\
-Dado un conjunto de $n$ ítems $S$, cada uno con un tamaño asociado $w_i$ y un beneficio asociado $p_i$, y una mochiula con una capacidad asociada $W$, encontrar el subconjjunto de ítems de $S$ que maximice el beneficio total sin exceder la capacidad de la mochila. Es decir, encontrar $R \subseteq S$ tal que $\sum_{i \in R} p_i$ sea máxima y se cumpla $\sum_{i \in R} w_i \leq W$. \\
+Dado un conjunto de $n$ ítems $S$, cada uno con un tamaño asociado $w_i$ y un beneficio asociado $p_i$, y una mochiula con una capacidad asociada $W$, encontrar el subconjunto de ítems de $S$ que maximice el beneficio total sin exceder la capacidad de la mochila. Es decir, encontrar $R \subseteq S$ tal que $\sum_{i \in R} p_i$ sea máxima y se cumpla $\sum_{i \in R} w_i \leq W$. Asumiremos que todos los valores mencionados son enteros no negativos.\par
+
+Para entender mejor el problema, mostraremos un ejemplo: \par
+Imaginemos que poseemos una mochila con capacidad 25, y quye poseemos 5 ítems, cada uno con su tamaño y beneficio asociados de esta forma:
+\begin{tabular}{c|c|c}
+	ítem & tamaño & beneficio \\ \hline
+	1 & 10 & 5 \\
+	2 & 15 & 4 \\
+	3 & 5 & 13 \\
+	4 & 10 & 8 \\
+	5 & 5 & 8
+\end{tabular}
+La combinación de ítems que maximizará el beneficio sin pasarse de la capacidad de la mochila será el conjunto $\{3, 4, 5\}$, que juntos suman un tamaño de $5 + 10 + 5 = 20$ y un beneficio de $13 + 8 + 8 = 29$. Cualquier otra combinación de los ítems que poseemos o no entrará en la mochila por tener un tamaño total mayor a la capacidad, o tendrá un beneficio total menor o igual al beneficio alcanzado con la solución dada. \par
+
 
 %\end{framed}
-
 \end{document}
