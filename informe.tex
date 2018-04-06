@@ -51,9 +51,11 @@ Algorítmicamente, desarrollaremos cuatro maneras de llegar a la solución para 
 	\item Programación Dinámica
 \end{itemize}
 
+\section{Fuerza Bruta}
+Este algoritmo resuelve el problema comparando todas las combinaciones de ítems entre sí.
+Las mismas se generan una tras otra, y como el único valor que nos interesa es el mayor beneficio que podamos alcanzar, mantenemos guardado el mayor beneficio alcanzado hasta el momento. Cada vez que se genera una combinación de ítems, se calcula su beneficio y su tamaño total. Si el tamaño es mayor a la capacidad de la mochila, la combinación se descarta. Si no, se compara el beneficio total de la solución actual con el mayor beneficio alcanzado hasta el momento, y se mantiene el mayor beneficio entre los dos, para ser comparado más tarde con la próxima posible solución. \par
+En el momento en el que ya se hubieron recorrido todas las combinaciones, el resultado será el del mayor beneficio encontrado hasta el momento.
 
-
-%\section
 
 
 %\end{framed}
