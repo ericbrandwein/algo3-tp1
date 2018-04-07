@@ -3,4 +3,7 @@ meet_in_the_middle
 backtracking
 dinamica
 informe.pdf
+*.aux
+*.log
+*.toc
 *.o
