@@ -6,6 +6,8 @@
 %\usepackage[latin1]{inputenc}
 % separación silábica en castellano
 \usepackage[spanish]{babel}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
 %\usepackage{framed}
 %\usepackage{array}
 %\usepackage{tabular}
@@ -52,11 +54,35 @@ Algorítmicamente, desarrollaremos cuatro maneras de llegar a la solución para 
 \end{itemize}
 
 \section{Fuerza Bruta}
+\subsection{Descripci\'on}
 Este algoritmo resuelve el problema comparando todas las combinaciones de ítems entre sí.
 Las mismas se generan una tras otra. Cada vez que se genera una combinación de ítems, se calcula su beneficio y su tamaño total. Si el tamaño es mayor a la capacidad de la mochila, la combinación se descarta. Si no, se compara el beneficio total de la solución actual con el mayor beneficio alcanzado hasta el momento, y se mantiene el mayor beneficio entre los dos, para ser comparado más tarde con la próxima posible solución. Si para el momento de la comparación no se había encontrado todavía una combinación que "entrase" en la mochila, el mayor beneficio encontrado hasta el momento será igual a cero. Podemos comenzar asumiendo un beneficio cero porque sabemos que siempre existe por lo menos una combinación de ítems con este beneficio; particularmente, la combinación en la que no se pone ningún item en la mochila posee este beneficio total.\par
 En el momento en el que ya se hubieron recorrido todas las combinaciones, el resultado será el mayor beneficio encontrado. \par
 
-Sabemos que no hay un mejor resultado que el devuelto porque si existiese una combinación con beneficio mayor, la hubiésemos encontrado y guardado. Y sabemos que hay una combinación con ese beneficio porque solo guardamos el resultado si encontramos una combinación con ese valor. Por ende, el resultado devuelto es el correcto.
+\subsection{Pseudoc\'odigo}
+%\begin{algorithmic}[2]
+%\While{$combinacion$}
+%	\State $mejor \gets $\Call{hola}
+%\end{algorithmic}
+
+\begin{algorithm}
+	\caption{Euclid’s algorithm}\label{euclid}
+	\begin{algorithmic}[1]
+		\Procedure{Euclid}{$a,b$}\Comment{The g.c.d. of a and b}
+		\State $r\gets a\bmod b$
+		\While{$r\not=0$}\Comment{We have the answer if r is 0}
+		\State $a\gets b$
+		\State $b\gets r$
+		\State $r\gets a\bmod b$
+		\EndWhile\label{euclidendwhile}
+		\State \textbf{return} $b$\Comment{The gcd is b}
+		\EndProcedure
+	\end{algorithmic}
+	\end{algorithm}
+
+\subsection{Correctitud}
+Sabemos que no hay un mejor resultado que el devuelto porque si existiese una combinación con beneficio mayor, la hubiésemos encontrado y guardado. Y sabemos que hay una combinación con ese beneficio porque solo guardamos el resultado si encontramos una combinación con ese valor. Por ende, el resultado devuelto es el correcto. \par
+
 
 
 
