@@ -99,7 +99,8 @@ int meet_in_the_middle(int capacidad, vector<item> items) {
 
 	// Para cada parte en el conjunto bajo, buscamos el que mejor se
 	// acople en el conjunto alto, o sea, el que tenga mas peso
-	// tal que sumarselo al peso de la parte actual
+	// tal que al sumarselo al peso de la parte actual no se supere
+	// la capacidad.
 	int mejor = 0;
 	for (int i = 0; i < partes_baja.size(); i++) {
 		parte parte_actual = partes_baja[i];
