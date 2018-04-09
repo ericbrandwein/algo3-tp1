@@ -101,20 +101,24 @@ Este algoritmo toma ventaja de la búsqueda binaria para mejorar la complejidad 
 \begin{algorithm}
 \caption{Meet in the Middle}
 \begin{algorithmic}[1]
-\Function{fuerzaBruta}{$capacidad, items$}
-	\State $mayorBeneficio \gets 0$
-	\State $combinacionActual \gets $\Call{primerCombinacion}{items}
-	\While{\Call{combinacionValida?}{combinacionActual}}
-		\State $tamanioActual \gets $\Call{tamanioDeCombinacion}{combinacion}
-		\If{$tamanioActual \leq capacidad$}
-			\State $beneficioActual \gets $\Call{beneficioDeCombinacion}{combinacionActual}
-			\State $mayorBeneficio \gets max(beneficioActual, mayorBeneficio)$
-		\EndIf
+\Function{meetInTheMiddle}{$capacidad, items$}
+	\State $primerMitad \gets items[0..items.size / 2]$
+	\State $segundaMitad \gets items[items.size / 2..items.size]$
 
-		\State $combinacionActual \gets $\Call{proximaCombinacion}{combinacionActual}
-	\EndWhile
+	\State $primerasPartes \gets $ \Call{conjuntoDePartes}{$primerMitad, capacidad$}
+	\State $segundasPartes \gets $ \Call{conjuntoDePartes}{$segundaMitad, capacidad$}
+
+	\State $segundasPartes \gets $ \Call{ordenarPartes}{$segundasPartes$}
+	\State $segundasPartes \gets $ \Call{sacarInservibles}{$segundasPartes$}
+	\State $combinacionActual \gets $ \Call{primerCombinacion}{$items$}
+
+	\State $posiblesSoluciones \gets $ \Call{combinar}{$primerasPartes, segundasPartes, capacidad$}
+
+	\State $mayorBeneficio \gets $ \Call{encontrarMayorBeneficio}{$posiblesSoluciones$}
 	\State \Return $mayorBeneficio$
 \EndFunction
+
+%\Function{}
 \end{algorithmic}
 \end{algorithm}
 
