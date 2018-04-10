@@ -110,15 +110,31 @@ Este algoritmo toma ventaja de la búsqueda binaria para mejorar la complejidad 
 
 	\State $segundasPartes \gets $ \Call{ordenarPartes}{$segundasPartes$}
 	\State $segundasPartes \gets $ \Call{sacarInservibles}{$segundasPartes$}
-	\State $combinacionActual \gets $ \Call{primerCombinacion}{$items$}
 
 	\State $posiblesSoluciones \gets $ \Call{combinar}{$primerasPartes, segundasPartes, capacidad$}
 
 	\State $mayorBeneficio \gets $ \Call{encontrarMayorBeneficio}{$posiblesSoluciones$}
 	\State \Return $mayorBeneficio$
 \EndFunction
-
-%\Function{}
+\\
+\Function{conjuntoDePartes}{$items, capacidad$}
+	\State $partes \gets \{(beneficio=0, tamano=0)\}$
+	\ForAll{$items$}
+		\ForAll{$partes$}
+			\State $nuevaParte \gets parteActual + itemActual$
+			\If{$nuevaParte.tamano <= capacidad$}
+				\State $partes.pushBack(nuevaParte)$
+			\EndIf
+		\EndFor
+	\EndFor
+	\State \Return $partes$
+\EndFunction
+\\
+\Function{sacarInservibles}{$items$}
+\EndFunction
+\\
+\Function{Combinar}{$primerasPartes, segundasPartes, capacidad$}
+\EndFunction
 \end{algorithmic}
 \end{algorithm}
 
