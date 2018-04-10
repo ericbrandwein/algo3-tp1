@@ -118,7 +118,7 @@ Este algoritmo toma ventaja de la búsqueda binaria para mejorar la complejidad 
 \EndFunction
 \\
 \Function{conjuntoDePartes}{$items, capacidad$}
-	\State $partes \gets \{(beneficio=0, tamano=0)\}$
+	\State $partes \gets \{parte(beneficio=0, tamano=0)\}$
 	\ForAll{$items$}
 		\ForAll{$partes$}
 			\State $nuevaParte \gets parteActual + itemActual$
@@ -130,7 +130,17 @@ Este algoritmo toma ventaja de la búsqueda binaria para mejorar la complejidad 
 	\State \Return $partes$
 \EndFunction
 \\
-\Function{sacarInservibles}{$items$}
+\Function{sacarInservibles}{$partesOriginales$}
+
+	\State $partes \gets \{parte(beneficio=0, tamano=0)\}$
+	\ForAll{partesOriginales}
+		\State $parteAnterior \gets partes.back()$
+		\If{$parteAnterior.beneficio < parteActual.beneficio$}
+			\State $partes.pushBack(parteActual)$
+		\EndIf
+	\EndFor
+
+	\State \Return $partes$
 \EndFunction
 \\
 \Function{Combinar}{$primerasPartes, segundasPartes, capacidad$}
