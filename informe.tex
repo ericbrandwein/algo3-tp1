@@ -173,7 +173,14 @@ Este algoritmo toma ventaja de la búsqueda binaria para mejorar la complejidad 
 \end{algorithmic}
 \end{algorithm}
 
-
+\subsection{Correctitud}
+%Sabemos que por lo menos uno de los conjuntos de ítems es la solución, porque sabemos que siempre por lo menos el conjunto vacío entra en la mochila.
+%Demostraremos la correctitud siguiendo los pasos de la descripción.
+Veamos que el valor devuelto es en realidad la solución del problema. \par
+Al principio, encontramos el conjunto de partes de cada una de las dos mitades, con un bucle que recorre todos los items. Por cada item, se suma su tamaño y su beneficio a todas las partes que ya se habían creado, y se generan partes nuevas. Así, tenemos todas las partes que se pueden armar con todos los items anteriores, más todas las mismas pero con el nuevo ítem. Cuando terminamos de recorrer todos los ítems, obtenemos todas las partes posibles de esa mitad, excepto las que sobrepasan la capacidad de la mochila, las cuales removemos.\par
+Luego, ordenamos las partes de menor a mayor en tamaño, y si dos combinaciones tienen el mismo tamaño, ordenamos de mayor a menor en beneficio. Hacer esto nos simplifica la tarea de remover las partes que llamamos ``inservibles". Son las partes para las cuales existe una parte en la misma mitad que sea mejor, es decir, que tenga menor o igual tamaño y mayor o igual beneficio. Si existe tal parte, la misma aprovecha mejor o igual el mismo tamaño, y por lo tanto no es necesario conservar las que lo utilizan peor.\par
+Sacar los inservibles hace que no pueda haber dos combinaciones con el mismo tamaño en la segunda mitad. Esto se debe a que, si hubiese dos con el mismo tamaño, alguna tendría menor o igual beneficio que la otra, y por lo tanto la habríamos sacado. Además, esa mitad está ordenada por beneficio. Veamos que esto es cierto.
+Sabemos que está ordenada por tamaño de menor a mayor, porque no cambiamos el orden que teníamos antes. Por lo mismo, también sabemos que si hubiese dos combinaciones de igual tamaño, la que tenga el mayor beneficio estará primera. Cuando sacamos las partes Además, si había una combinación con mayor o igual tamaño y menor o igual beneficio que uno anterior, ya lo sacamos.
 
 %\end{framed}
 \end{document}
