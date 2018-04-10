@@ -83,6 +83,20 @@ En el momento en el que ya se hubieron recorrido todas las combinaciones, el res
 \subsection{Correctitud}
 Sabemos que no hay un mejor resultado que el devuelto porque si existiese una combinación con beneficio mayor, la hubiésemos encontrado y guardado. Y sabemos que hay una combinación con ese beneficio porque solo guardamos el resultado si encontramos una combinación con ese beneficio. Por ende, el resultado devuelto es el correcto. \par
 
+\subsection{Complejidad}
+Para calcular la complejidad, seguiremos el pseudocódigo anterior paso a paso. Tomaremos $n$ como la cantidad de ítems que se pasan como parámetro.\par
+\begin{itemize}
+	\item Las líneas 2 y 12 tienen una complejidad de $O(1)$.
+	\item La línea 3 llama a la función $primerCombinacion$, que devuelve una combinación de ítems en $O(n)$.
+	\item En la línea 4 comienza el bucle que recorrerá todas las combinaciones de ítems. La cantidad de combinaciones de ítems será $2^n$, ya que cada por cada ítem hay dos posibilidades: que esté adentro de la mochila o que no esté. Además, en la misma linea se llama a la función $combinacionValida?$, la cual tiene una complejidad de $O(n)$. Así que, en un principio, este bucle tiene una complejidad de $O(2^n * n)$.
+	\item La línea 5 llama a $tamanioDeCombinacion$, que calcula la suma de todos los tamaños de cada ítem presente en la combinación actual. Tiene una complejidad de $O(n)$, la cual no suma a la complejidad ya establecida del bucle de $O(2^n * n)$.
+	\item La línea 6 realiza una comparación simple, de complejidad $O(1)$. Lo mismo sucede con la línea 8, que solo calcula un máximo.
+	\item La línea 7 hace algo parecido a la línea 5, pero en vez de sumar los tamaños, suma los beneficios. Otra vez, no aumenta la complejidad ya establecida para el bucle.
+	\item La línea 10 calcula la próxima combinación de ítems. Esto se puede lograr con una complejidad de $O(n)$, si tomamos una combinación de items como un número binario de longitud $n$, con los $1$ significando que el ítem está presente. La primera combinación podría ser la vacía, y cada vez que se avanza a la siguiente combinación, lo único que se hace es sumarle uno al número binario que representaba a la combinación anterior. Esta línea tampoco aumenta la complejidad del bucle.
+\end{itemize}
+Gracias a éste análisis, podemos ahora sumar las complejidades de cada línea, y encontrar la complejidad final del algoritmo: $2 * O(1) + O(n) + O(2^n * 3n) = O(2^n * n)$.
+
+
 \section{Meet in the Middle}
 \subsection{Descripción}
 Este algoritmo toma ventaja de la búsqueda binaria para mejorar la complejidad del algoritmo de fuerza bruta. A grandes rasgos, el algoritmo sigue estos pasos: \\
