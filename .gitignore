@@ -7,3 +7,4 @@ informe.pdf
 *.log
 *.toc
 *.o
+build/
