@@ -200,6 +200,26 @@ La poda por factibilidad es simple: mientras vamos haciendo decisiones sobre los
 La poda por optimalidad, en cambio, es un poco más elaborada. Antes de comenzar a recorrer el árbol, ordenamos los ítems de mayor a menor según el valor que toma su $beneficio/tamano$; su ``ratio". Mientras recorremos el árbol, vamos sumando los beneficios de los ítems que agregamos a la combinación. Además, cada vez que debamos tomar a una decisión, nos fijamos si llenar la capacidad restante de la mochila con un ítem hipotético que tenga el mismo ratio que el ítem actual mejora el beneficio de la mejor solución encontrada hasta el momento. Si no lo mejora, ya sabemos que cualquier combinación de ítems siguientes no superará en beneficio a la solución que habíamos encontrado antes, y por lo tanto esta rama ya no nos sirve, lo que nos hace pasar a la siguiente.\par
 Al finalizar, devolvemos el mayor beneficio que hayamos encontrado para una solución factible.
 
-\subsection{}
+\subsection{Pseudocódigo}
+\begin{algorithm}
+\caption{Backtracking}
+\begin{algorithmic}[1]
+\Function{backtracking}{$capacidad, items$}
+	\State $itemsOrdenados \gets $\Call{ordenarItemsPorRatio}{items}
+	\State $mejorBeneficio \gets 0$
+	\State $solucion \gets solucion(items = \{\}, beneficio = 0, tamano = 0)$
+	\State $solucion \gets $\Call{proximaSolucion}{capacidad, itemsOrdenados, solucion}
+	\While{esValida(solucion)}
+		\State $mejorBeneficio \gets max(mejorBeneficio, solucion.beneficio)$
+		\State $solucion \gets $\Call{proximaSolucion}{capacidad, itemsOrdenados, solucion}
+	\EndWhile
+	\State \Return $mejorBeneficio$
+\EndFunction
+\\
+\Function{proximaSolucion}{$capacidad, itemsOrdenados, solucionActual$}
+\EndFunction
+\end{algorithmic}
+\end{algorithm}
+
 %\end{framed}
 \end{document}
