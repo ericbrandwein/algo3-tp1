@@ -208,15 +208,34 @@ Al finalizar, devolvemos el mayor beneficio que hayamos encontrado para una solu
 	\State $itemsOrdenados \gets $\Call{ordenarItemsPorRatio}{items}
 	\State $mejorBeneficio \gets 0$
 	\State $solucion \gets solucion(items = \{\}, beneficio = 0, tamano = 0)$
-	\State $solucion \gets $\Call{proximaSolucion}{capacidad, itemsOrdenados, solucion}
-	\While{esValida(solucion)}
+	\State $solucion \gets $\Call{proximaPosibleSolucion}{capacidad, itemsOrdenados, solucion}
+	\While{solucion.esValida}
 		\State $mejorBeneficio \gets max(mejorBeneficio, solucion.beneficio)$
-		\State $solucion \gets $\Call{proximaSolucion}{capacidad, itemsOrdenados, solucion}
+		\State $solucion \gets $\Call{proximaPosibleSolucion}{capacidad, itemsOrdenados, solucion}
 	\EndWhile
 	\State \Return $mejorBeneficio$
 \EndFunction
 \\
-\Function{proximaSolucion}{$capacidad, itemsOrdenados, solucionActual$}
+\Function{proximaPosibleSolucion}{$capacidad, itemsOrdenados, solucionActual, mejorBeneficio$}
+	\State $combinacionActual \gets solucionActual$
+	\If{solucionActual.items == \{\}}
+		\State $combinacionActual \gets $\Call{avanzar}{capacidad, itemsOrdenados, combinacionActual, mejorBeneficio}
+		\If{llegamosAPosibleSolucion(combinacionActual)}
+			\State $combinacionActual.esValida \gets true$
+			\State \Return $combinacionActual$
+		\EndIf
+	\EndIf
+\\
+	\Repeat
+		\State $combinacionActual \gets $\Call{retroceder}{itemsOrdenados, combinacionActual}
+		\If{retrocedimosDeMas(combinacionActual)}
+			\State $combinacionActual.esValida \gets false$
+			\State \Return $combinacionActual$
+		\EndIf
+
+		\State $combinacionActual \gets $\Call{avanzar}{capacidad, itemsOrdenados, combinacionActual, mejorBeneficio}
+	\Until{llegamosAPosibleSolucion(combinacionActual)}
+	\State \Return $combinacionActual$
 \EndFunction
 \end{algorithmic}
 \end{algorithm}
