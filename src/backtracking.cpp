@@ -130,7 +130,7 @@ bool primer_solucion(int capacidad, vector<item> items,
 		items_actuales[i] = false;
 	}
 	int posicion_actual = avanzar(capacidad, items_actuales, items,
-			0, valor_actual, peso_actual, 0);;
+			0, valor_actual, peso_actual, 0);
 	if (posicion_actual < items.size()) {
 		return proxima_solucion_retrocediendo_desde(
 			capacidad, items, items_actuales, valor_actual, peso_actual,
