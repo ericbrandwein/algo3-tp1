@@ -221,7 +221,6 @@ Al finalizar, devolvemos el mayor beneficio que hayamos encontrado para una solu
 	\If{solucionActual.items == \{\}}
 		\State $combinacionActual \gets $\Call{avanzar}{capacidad, itemsOrdenados, combinacionActual, mejorBeneficio}
 		\If{llegamosAPosibleSolucion(combinacionActual)}
-			\State $combinacionActual.esValida \gets true$
 			\State \Return $combinacionActual$
 		\EndIf
 	\EndIf
@@ -236,6 +235,12 @@ Al finalizar, devolvemos el mayor beneficio que hayamos encontrado para una solu
 		\State $combinacionActual \gets $\Call{avanzar}{capacidad, itemsOrdenados, combinacionActual, mejorBeneficio}
 	\Until{llegamosAPosibleSolucion(combinacionActual)}
 	\State \Return $combinacionActual$
+\EndFunction
+\\
+\Function{avanzar}{$capacidad, itemsOrdenados, combinacionActual, mejorBeneficio$}
+\EndFunction
+\\
+\Function{retroceder}{$itemsOrdenados, combinacionActual$}
 \EndFunction
 \end{algorithmic}
 \end{algorithm}
