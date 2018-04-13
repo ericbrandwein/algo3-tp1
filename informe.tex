@@ -8,6 +8,8 @@
 \usepackage[spanish]{babel}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
+\usepackage{tikz}
+\usepackage{tikz-qtree}
 %\usepackage{framed}
 %\usepackage{array}
 %\usepackage{tabular}
@@ -198,11 +200,37 @@ En el algoritmo de Backtracking armaremos un árbol de decisiones, cada una espe
 A diferencia del algoritmo de Fuerza Bruta, para no probar con combinaciones de ítems que ya sabemos de antemano que no serán óptimas o que directamente no entrarán en la mochila, haremos podas de factibilidad y de optimalidad, es decir, cuando se cumplan algunas condiciones particulares, no seguiremos decidiendo en la rama en la que estamos, sino que pasaremos a una rama diferente.\par
 La poda por factibilidad es simple: mientras vamos haciendo decisiones sobre los ítems, vamos sumando los tamaños de los que agregamos. Cuando el tamaño sumado sobrepasa la capacidad de la mochila, sabemos que esta rama no es factible, así que pasamos a la siguiente.\par
 La poda por optimalidad, en cambio, es un poco más elaborada. Antes de comenzar a recorrer el árbol, ordenamos los ítems de mayor a menor según el valor que toma su $beneficio/tamano$; su ``ratio". Mientras recorremos el árbol, vamos sumando los beneficios de los ítems que agregamos a la combinación. Además, cada vez que debamos tomar a una decisión, nos fijamos si llenar la capacidad restante de la mochila con un ítem hipotético que tenga el mismo ratio que el ítem actual mejora el beneficio de la mejor solución encontrada hasta el momento. Si no lo mejora, ya sabemos que cualquier combinación de ítems siguientes no superará en beneficio a la solución que habíamos encontrado antes, y por lo tanto esta rama ya no nos sirve, lo que nos hace pasar a la siguiente.\par
-Al finalizar, devolvemos el mayor beneficio que hayamos encontrado para una solución factible.
+Al finalizar, devolvemos el mayor beneficio que hayamos encontrado para una solución factible.\par
+Pasaremos a mostrar una corrida hipotética del algoritmo con los valores presentados en el ejemplo de la descripción del problema. La capacidad de la mochila era 25, y la lista de ítems provistos es $[(10, 5), (15, 4), (5, 13), (10, 8), (5, 8)]$, siendo un ítem una tupla $(tamano, beneficio)$.\par
+Primero, se ordena la lista por ratio, lo que nos resulta en $[(5, 13), (5, 8), (10, 8), (10, 5), (15, 4)]$. Luego, recorremos el árbol de decisiones, empezando con la decisión de que el primer ítem se encuentra en la combinación que probaremos. Agregando ese item, tomamos su tamaño y su beneficio, y los establecemos como los valores actuales de la combinación actual. Tenemos entonces 5 de tamaño y 13 de beneficio por ahora.\par
+Avanzamos a la decisión siguiente, que es la de agregar o no el segundo ítem. Si lo agregásemos, el tamaño de la combinación pasaría a ser 10, y el beneficio 21. Como 10 no se pasa de la capacidad de la mochila, la combinación por ahora pasa la poda de factibilidad. Y la poda por optimalidad por ahora no hace falta chequearla porque no encontramos todavía una posible solución, así que podemos agregar el ítem a la combinación actual.\par
+Seguimos con la próxima decisión, que es de agregar el ítem $(10, 8)$. Lo agregamos, por lo mismo que antes, y nos queda un tamaño actual de 20 y un beneficio de 29.\par
+Agregar el cuarto ítem haría que no pasásemos la poda por factibildad, así que decidimos no agregarlo. Lo mismo con el quinto ítem, con lo que llegamos a una posible solución que entra en la mochila y tiene beneficio 29. Nos guardamos este valor para después usarlo en la poda por optimalidad.\par
+Ahora que llegamos a una hoja del árbol de decisiones, volvemos para atrás hasta encontrar el último ítem que hayamos agregado a la combinación, y probar la combinación de ítems sin ese ítem. Este ítem es el tercero, el $(10, 8)$, y sacándolo nos queda un beneficio de 21 y un tamaño de 10.\par
+Ahora tratamos de agregar el cuarto ítem, el $(10, 5)$. Si lo agregásemos, nos quedaría un tamaño de 20, o sea que pasa la poda de factibilidad. Para la poda de optimalidad, calculamos su ratio, que es $5 / 10 = 0.5$, y llenamos el tamaño restante de la mochila con ese ratio. Esto quiere decir que hacemos la cuenta $0.5 * (25 - 10) = 7.5$. Luego, sumamos el valor resultante con el beneficio actual, que sería $21 + 7.5 = 28$. Como 28 es menor al beneficio de la mejor posible solución que encontramos, sabemos que, aunque llenemos la mochila con todos los ítems que quedan, la posible solución no nos va a servir. Por eso, descartamos toda la rama actual, y volvemos a buscar el último ítem que agregamos, que ahora pasa a ser el segundo, el $(5, 8)$.\par
+Si siguiésemos con el algoritmo, veríamos que ninguna combinación de ítems factible supera el beneficio que ya encontramos, así que la solución al problema resulta ser 29.\par
+
+
+
+%\Tree
+%[.{item 1}
+%	[.{item 2} [.{item 3} [.{item 4} {item 5} {item 5} ]
+%               			  [.{item 4} {item 5} {item 5} ]]
+%               [.{item 3} [.{item 4} {item 5} {item 5} ]
+%               			  [.{item 4} {item 5} {item 5} ]]]
+%	[.{item 2} [.{item 3} [.{item 4} {item 5} {item 5} ]
+%                           [.{item 4} {item 5} {item 5} ]]
+%               [.{item 3} [.{item 4} {item 5} {item 5} ]
+%                           [.{item 4} {item 5} {item 5} ]]]]
 
 \subsection{Pseudocódigo}
 
 Lamentablemente, el pseudocódigo de este algoritmo se vuelve demasiado extenso, y no aporta a la comprensión, así que lo omitimos.
+
+\subsection{Correctitud}
+
+
+\subsection{Complejidad}
 
 %\end{framed}
 \end{document}
