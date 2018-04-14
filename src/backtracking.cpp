@@ -8,7 +8,7 @@ using namespace std;
 /**
 Devuelve el valor / peso del item. El peso debe ser > 0.
 */
-double ratio(item i) {
+double ratio(item& i) {
 	return (double) i.valor / (double) i.peso;
 }
 
@@ -24,7 +24,7 @@ Poda por optimalidad:
 	el proximo item.
 */
 bool por_optimalidad(int capacidad, int peso_actual, int valor_actual,
-	int posicion_actual, vector<item> items, int mejor_valor) {
+	int posicion_actual, vector<item>& items, int mejor_valor) {
 
 	item item_actual = items[posicion_actual];
 	if (item_actual.peso == 0) {
@@ -47,12 +47,12 @@ Poda por factibilidad:
 	Si agregar el item hace que nos pasemos de la capacidad,
 	no lo agregamos.
 */
-bool por_factibilidad(int capacidad, int peso_actual, item nuevo_item) {
+bool por_factibilidad(int capacidad, int peso_actual, item& nuevo_item) {
 	return peso_actual + nuevo_item.peso <= capacidad;
 }
 
-int retroceder(bool items_actuales[], vector<item> items,
-	int posicion_actual, int *valor_actual, int* peso_actual) {
+int retroceder(bool items_actuales[], vector<item>& items,
+	int posicion_actual, int* valor_actual, int* peso_actual) {
 	// Encontramos el ultimo que sea verdadero
 	for (;posicion_actual >= 0 && !items_actuales[posicion_actual];
 		posicion_actual--);
@@ -66,7 +66,7 @@ int retroceder(bool items_actuales[], vector<item> items,
 	return posicion_actual;
 }
 
-int avanzar(int capacidad, bool items_actuales[], vector<item> items,
+int avanzar(int capacidad, bool items_actuales[], vector<item>& items,
 	int posicion_actual, int* valor_actual, int* peso_actual,
 	int mejor_valor) {
 
@@ -94,7 +94,7 @@ int avanzar(int capacidad, bool items_actuales[], vector<item> items,
 	return posicion_actual;
 }
 
-bool proxima_solucion_retrocediendo_desde(int capacidad, vector<item> items,
+bool proxima_solucion_retrocediendo_desde(int capacidad, vector<item>& items,
 	bool items_actuales[], int* valor_actual, int* peso_actual,
 	int mejor_valor, int posicion_actual) {
 
@@ -122,7 +122,7 @@ podria ser solucion.
 
 Devuelve false si los items_actuales ya constituyen la ultima solucion.
 */
-bool proxima_solucion(int capacidad, vector<item> items,
+bool proxima_solucion(int capacidad, vector<item>& items,
 	bool items_actuales[], int* valor_actual, int* peso_actual,
 	int mejor_valor) {
 
@@ -134,7 +134,7 @@ bool proxima_solucion(int capacidad, vector<item> items,
 /**
 Devuelve false si no hay solucion posible.
 */
-bool primer_solucion(int capacidad, vector<item> items,
+bool primer_solucion(int capacidad, vector<item>& items,
 	bool items_actuales[], int* valor_actual, int* peso_actual) {
 	for (int i = 0; i < items.size(); i++) {
 		items_actuales[i] = false;
@@ -149,7 +149,7 @@ bool primer_solucion(int capacidad, vector<item> items,
 	return true;
 }
 
-bool comparar_por_ratio(item i, item j) {
+bool comparar_por_ratio(item& i, item& j) {
 	bool mas_grande = false;
 	if (i.peso == 0) {
 		if (j.peso == 0) {
@@ -163,7 +163,7 @@ bool comparar_por_ratio(item i, item j) {
 	return mas_grande;
 }
 
-int backtracking(int capacidad, vector<item> items) {
+int backtracking(int capacidad, vector<item>& items) {
 	// Ordenamos primero los items por valor / peso
 	sort(items.begin(), items.end(), comparar_por_ratio);
 

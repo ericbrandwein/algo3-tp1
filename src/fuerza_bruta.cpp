@@ -5,7 +5,7 @@ using namespace std;
 #include <vector>
 #include "utils.h"
 
-int valor_de_items(int cant_items, vector<item> items, bool puestos[]) {
+int valor_de_items(int cant_items, vector<item>& items, bool puestos[]) {
 	int valor = 0;
 	for (int i = 0; i < cant_items; i++) {
 		if (puestos[i]) {
@@ -15,7 +15,7 @@ int valor_de_items(int cant_items, vector<item> items, bool puestos[]) {
 	return valor;
 }
 
-int peso_de_items(int cant_items, vector<item> items, bool puestos[]) {
+int peso_de_items(int cant_items, vector<item>& items, bool puestos[]) {
 	int peso = 0;
 	for (int i = 0; i < cant_items; i++) {
 		if (puestos[i]) {
@@ -26,11 +26,11 @@ int peso_de_items(int cant_items, vector<item> items, bool puestos[]) {
 }
 
 /**
- * Calcula el valor de la sol_actual, y se fija si es mejor 
- * solucion que la anterior. Devuelve el nuevo mejor valor.  
+ * Calcula el valor de la sol_actual, y se fija si es mejor
+ * solucion que la anterior. Devuelve el nuevo mejor valor.
  */
 int mejor_solucion(int capacidad, int cant_items,
-	vector<item> items, int valor_anterior,
+	vector<item>& items, int valor_anterior,
 	bool sol_actual[]) {
 
 	int valor_actual =
@@ -68,7 +68,7 @@ bool proxima_combinacion(int cant_items, bool items_actuales[]) {
 	return true;
 }
 
-int fuerza_bruta(int capacidad, int cant_items, vector<item> items) {
+int fuerza_bruta(int capacidad, int cant_items, vector<item>& items) {
 	// decidiremos para cada objeto si va o no.
 	// eso lo podemos hacer con un vector de objetos,
 	// o con un array que te diga si esta o no.
@@ -76,7 +76,7 @@ int fuerza_bruta(int capacidad, int cant_items, vector<item> items) {
 	// lo voy a hacer con un array porque no se usar vector,
 	// y siento que se me va a complicar mas el codigo si lo uso.
 
-	// array que te dice si cada objeto esta o no esta en la 
+	// array que te dice si cada objeto esta o no esta en la
 	// solucion parcial actual.
 	bool items_actuales[cant_items];
 	for (int i = 0; i < cant_items; i++) {

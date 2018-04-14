@@ -6,7 +6,7 @@ using namespace std;
 #include <array>
 #include "utils.h"
 
-int dinamica(int capacidad_total, vector<item> items) {
+int dinamica(int capacidad_total, vector<item>& items) {
 	// Vector de vectores de valores, cada columna indica la capacidad
 	// y cada fila indica la cantidad de items que estamos usando.
 	vector<vector<int>> valores_por_capacidades;

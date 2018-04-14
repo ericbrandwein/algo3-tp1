@@ -10,7 +10,7 @@ typedef item parte;
 /**
 Devuelve una nueva parte que viene de sumar el item a la parte_original.
 */
-parte agregar_item(parte parte_original, item sumado) {
+parte agregar_item(parte& parte_original, item& sumado) {
 	return parte(parte_original.peso + sumado.peso,
 		parte_original.valor + sumado.valor);
 }
@@ -18,7 +18,7 @@ parte agregar_item(parte parte_original, item sumado) {
 /**
 Armamos el conjunto de partes sin agregar las partes que se pasan de peso.
 */
-vector<parte> conjunto_de_partes(int capacidad, vector<item> items) {
+vector<parte> conjunto_de_partes(int capacidad, vector<item>& items) {
 	vector<parte> partes = {parte(0, 0)};
 
 	for (int i = 0; i < items.size(); i++) {
@@ -42,7 +42,7 @@ las que tengan una parte con mayor valor y con el mismo o menor peso.
 El argumento partes deberia estar ordenado de menor a mayor segun el peso,
 y luego de mayor a menor segun el valor.
 */
-vector<parte> sacar_partes_inservibles(vector<parte> partes_originales) {
+vector<parte> sacar_partes_inservibles(vector<parte>& partes_originales) {
 	vector<parte> partes;
 	for (int i = 0; i < partes_originales.size(); i++) {
 		/*
@@ -71,7 +71,7 @@ vector<parte> sacar_partes_inservibles(vector<parte> partes_originales) {
 	return partes;
 }
 
-bool comparar_por_peso_y_despues_valor_al_reves(parte uno, parte dos) {
+bool comparar_por_peso_y_despues_valor_al_reves(parte& uno, parte& dos) {
 	return uno.peso < dos.peso ||
 		(uno.peso == dos.peso && uno.valor > dos.valor);
 }
@@ -80,7 +80,7 @@ bool comparar_peso(int peso, parte parte_actual) {
 	return peso < parte_actual.peso;
 }
 
-int meet_in_the_middle(int capacidad, vector<item> items) {
+int meet_in_the_middle(int capacidad, vector<item>& items) {
 	int mitad_size = items.size() / 2;
 	vector<item> mitad_baja(items.begin(), items.begin() + mitad_size);
 	vector<item> mitad_alta(items.begin() + mitad_size, items.end());
