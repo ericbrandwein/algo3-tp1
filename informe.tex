@@ -251,7 +251,7 @@ Para generar esta tabla, recorreremos fila por fila hasta llegar a la última ca
 	\State $beneficioConItemActual \gets beneficioASumar + itemActual.beneficio$
 	\State $mejorBeneficio \gets max(beneficioConItemActual, beneficioSinItemActual)$
 \EndIf
-\State \Return $mejorBeneficio$
+\State $beneficios[itemActual][capacidadActual] = mejorBeneficio$
 \end{algorithmic}
 
 Este pseudocódigo no toma en cuenta el caso en el que estemos en la primer fila y no haya una anterior. En este caso lo único que hacemos es igualar el beneficio al beneficio del ítem actual, si es que el mismo entra en la capacidad reducida actual, y, si no, decimos que el beneficio es cero.\par
