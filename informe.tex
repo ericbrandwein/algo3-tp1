@@ -258,5 +258,8 @@ Este pseudocódigo no toma en cuenta el caso en el que estemos en la primer fila
 Como recorremos la tabla de izquierda a derecha y luego de arriba a abajo, la fila anterior siempre está completa antes de pasar a la siguiente, y por lo tanto no tiene valores inválidos para cuando hacemos la comparación.\par
 La última casilla de la tabla es la que utiliza todos los ítems en una mochila con capacidad igual a la capacidad original. Como en cada casilla tenemos el máximo beneficio alcanzable con los ítems anteriores, en la última tendremos el máximo beneficio alcanzable con los parámetros pasados. Y esta es la solución que estamos buscando.\par
 
+\subsection{Complejidad}
+La complejidad estará determinada por la cantidad de casillas que recorramos, y las operaciones que realicemos en cada una de esas casillas. En cada casilla, lo único que hacemos es como máximo dos consultas y una asignación a una tabla, y comparaciones, sumas y restas. Todas estas operaciones tienen complejidad $O(1)$. La cantidad de casillas que recorramos será igual a la cantidad de casillas en una tabla de $n*(W+1)$. Con estos dos datos, la complejidad resultante será $O(1) * O(n*(W+1)) = O(n*W)$.\par
+Cabe notar que este algoritmo es el único en el que la complejidad depende no solo de la cantidad de ítems en la lista, sino también en el valor de la capacidad de la mochila.
 %\end{framed}
 \end{document}
