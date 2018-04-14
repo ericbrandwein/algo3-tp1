@@ -5,6 +5,9 @@ using namespace std;
 #include <vector>
 #include "utils.h"
 
+/**
+Devuelve el valor / peso del item. El peso debe ser > 0.
+*/
 double ratio(item i) {
 	return (double) i.valor / (double) i.peso;
 }
@@ -23,10 +26,17 @@ Poda por optimalidad:
 bool por_optimalidad(int capacidad, int peso_actual, int valor_actual,
 	int posicion_actual, vector<item> items, int mejor_valor) {
 
-	int valor_solucion = valor_actual;
-	double ratio_item = ratio(items[posicion_actual]);
-	valor_solucion += ratio_item * (capacidad - peso_actual);
-	return valor_solucion > mejor_valor;
+	item item_actual = items[posicion_actual];
+	if (item_actual.peso == 0) {
+		// Si el peso es 0, el ratio es "infinito",
+		// así que nunca nos va a servir para la comparación.
+		return true;
+	} else {
+		int valor_solucion = valor_actual;
+		double ratio_item = ratio(item_actual);
+		valor_solucion += ratio_item * (capacidad - peso_actual);
+		return valor_solucion > mejor_valor;
+	}
 }
 
 /**
@@ -140,7 +150,17 @@ bool primer_solucion(int capacidad, vector<item> items,
 }
 
 bool comparar_por_ratio(item i, item j) {
-	return ratio(i) > ratio(j);
+	bool mas_grande = false;
+	if (i.peso == 0) {
+		if (j.peso == 0) {
+			mas_grande = i.valor > j.valor;
+		} else {
+			mas_grande = true;
+		}
+	} else if (j.peso > 0) {
+		mas_grande = ratio(i) > ratio(j);
+	}
+	return mas_grande;
 }
 
 int backtracking(int capacidad, vector<item> items) {
