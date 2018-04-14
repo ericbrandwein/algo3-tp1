@@ -221,10 +221,6 @@ Si siguiésemos con el algoritmo, veríamos que ninguna combinación de ítems f
 %               [.{item 3} [.{item 4} {item 5} {item 5} ]
 %                           [.{item 4} {item 5} {item 5} ]]]]
 
-\subsection{Pseudocódigo}
-
-Lamentablemente, el pseudocódigo de este algoritmo se vuelve demasiado extenso, y no aporta a la comprensión, así que lo omitimos.
-
 \subsection{Correctitud}
 Para ver la idea de por qué el algoritmo devuelve un resultado correcto, veremos que no nos salteamos ninguna combinación que pueda ser solución.\par
 Si hubiésemos implementado el algoritmo sin las podas, sabemos que la solución es la correcta, porque recorre todas las combinaciones de ítems pasando por el árbol de decisiones. Si agregamos la poda de factibilidad, también es fácil ver que llegamos a la solución correcta, porque sabemos que si agregamos un ítem y nos pasamos de la capacidad de la mochila, ninguna combinación en la que agreguemos más ítems todavía tendría menor tamaño, dado que todos los ítems tienen un tamaño no negativo. Por ende, no hay ninguna combinación que pueda ser solución que no revisamos.\par
