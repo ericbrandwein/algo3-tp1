@@ -3,6 +3,7 @@ using namespace std;
 #include <iostream>
 #include <algorithm>
 #include <vector>
+#include <chrono>
 #include "utils.h"
 
 /**
@@ -33,7 +34,7 @@ bool por_optimalidad(int capacidad, int peso_actual, int valor_actual,
 		return true;
 	} else {
 		int valor_solucion = valor_actual;
-		double ratio_item = ratio(item_actual);
+		double ratio_item = ::ratio(item_actual);
 		valor_solucion += ratio_item * (capacidad - peso_actual);
 		return valor_solucion > mejor_valor;
 	}
@@ -158,7 +159,7 @@ bool comparar_por_ratio(item& i, item& j) {
 			mas_grande = true;
 		}
 	} else if (j.peso > 0) {
-		mas_grande = ratio(i) > ratio(j);
+		mas_grande = ::ratio(i) > ::ratio(j);
 	}
 	return mas_grande;
 }
@@ -182,12 +183,26 @@ int backtracking(int capacidad, vector<item>& items) {
 	return mejor_valor;
 }
 
-int main() {
-	int capacidad, cant_items;
-	vector<item> items = parsear_entrada(&capacidad, &cant_items);
-    int solucion = backtracking(capacidad, items);
+// int main() {
 
-    cout << solucion << endl;
-    return 0;
-}
+//     cout << "steady_clock" << endl;
+//     cout << chrono::steady_clock::period::num << endl;
+//     cout << chrono::steady_clock::period::den << endl;
+//     cout << "steady = " << boolalpha << chrono::steady_clock::is_steady << endl << endl;
+
+// 	int capacidad, cant_items;
+// 	vector<item> items = parsear_entrada(&capacidad, &cant_items);
+
+//     cout << endl << endl;
+//     auto startFuerzaBruta4 = chrono::steady_clock::now();
+//     int solucion = backtracking(capacidad, items);
+//     auto endFuerzaBruta4 = chrono::steady_clock::now();
+
+//     cout << solucion << endl;
+
+//     auto diffFuerzaBruta4 = endFuerzaBruta4 - startFuerzaBruta4;
+//     cout << "Tiempo utilizado por Fuerza bruta " << chrono::duration <double, milli> (diffFuerzaBruta4).count() << " ms" << endl;
+
+//     return 0;
+// }
 

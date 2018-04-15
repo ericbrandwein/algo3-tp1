@@ -49,11 +49,11 @@ int dinamica(int capacidad_total, vector<item>& items) {
 	return valor_final;
 }
 
-int main() {
-	int capacidad, cant_items;
-	vector<item> items = parsear_entrada(&capacidad, &cant_items);
-    int solucion = dinamica(capacidad, items);
+// int main() {
+// 	int capacidad, cant_items;
+// 	vector<item> items = parsear_entrada(&capacidad, &cant_items);
+//     int solucion = dinamica(capacidad, items);
 
-    cout << solucion << endl;
-    return 0;
-}
+//     cout << solucion << endl;
+//     return 0;
+// }

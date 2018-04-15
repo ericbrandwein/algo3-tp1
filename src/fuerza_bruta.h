@@ -1,0 +1,1 @@
+int fuerza_bruta(int capacidad, vector<item>& items);

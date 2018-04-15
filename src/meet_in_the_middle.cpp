@@ -119,11 +119,11 @@ int meet_in_the_middle(int capacidad, vector<item>& items) {
 	return mejor;
 }
 
-int main() {
-	int capacidad, cant_items;
-	vector<item> items = parsear_entrada(&capacidad, &cant_items);
-    int solucion = meet_in_the_middle(capacidad, items);
+// int main() {
+// 	int capacidad, cant_items;
+// 	vector<item> items = parsear_entrada(&capacidad, &cant_items);
+//     int solucion = meet_in_the_middle(capacidad, items);
 
-    cout << solucion << endl;
-    return 0;
-}
+//     cout << solucion << endl;
+//     return 0;
+// }

@@ -1,0 +1,1 @@
+int dinamica(int capacidad, vector<item>& items);

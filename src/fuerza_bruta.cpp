@@ -68,7 +68,7 @@ bool proxima_combinacion(int cant_items, bool items_actuales[]) {
 	return true;
 }
 
-int fuerza_bruta(int capacidad, int cant_items, vector<item>& items) {
+int fuerza_bruta(int capacidad, vector<item>& items) {
 	// decidiremos para cada objeto si va o no.
 	// eso lo podemos hacer con un vector de objetos,
 	// o con un array que te diga si esta o no.
@@ -78,6 +78,7 @@ int fuerza_bruta(int capacidad, int cant_items, vector<item>& items) {
 
 	// array que te dice si cada objeto esta o no esta en la
 	// solucion parcial actual.
+	int cant_items = items.size();
 	bool items_actuales[cant_items];
 	for (int i = 0; i < cant_items; i++) {
 		items_actuales[i] = false;
@@ -94,12 +95,12 @@ int fuerza_bruta(int capacidad, int cant_items, vector<item>& items) {
 	return mejor;
 }
 
-int main() {
-	int capacidad, cant_items;
-	vector<item> items = parsear_entrada(&capacidad, &cant_items);
-    int solucion = fuerza_bruta(capacidad, cant_items, items);
+// int main() {
+// 	int capacidad, cant_items;
+// 	vector<item> items = parsear_entrada(&capacidad, &cant_items);
+//     int solucion = fuerza_bruta(capacidad, items);
 
-    cout << solucion << endl;
-    return 0;
-}
+//     cout << solucion << endl;
+//     return 0;
+// }
 

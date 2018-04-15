@@ -4,7 +4,7 @@ using namespace std;
 #include <iostream>
 #include "utils.h"
 
-vector<item> parsear_entrada(int* capacidad, int* cant_items) {
+vector<item> parsear_entrada(int* cant_items, int* capacidad) {
 	cin >> *cant_items >> *capacidad;
 	vector<item> items;
 	for (int i = 0; i < *cant_items; i++) {
