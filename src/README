@@ -1,0 +1,21 @@
+El archivo main.cpp se usó para medir los tiempos de cada uno de los
+algoritmos. Se comentaron las funciones main() de los archivos de
+algoritmos antes de compilar el main.cpp con los .h.
+
+El archivo generate-test.py genera una entrada de ejemplo con la cantidad
+de items, la capacidad y el máximo tamaño de cada ítem pasados como
+parámetro.
+
+El archivo test_both.sh se usó para comprobar que los cuatro algoritmos
+devolviesen la misma respuesta cuando son llamados con la misma entrada.
+Lo corrí numerosas veces para ver que era así.
+
+El archivo test_tiempos.sh llama 100 veces al ejecutable generado con el
+main.cpp, que lo llamé "tiempos". Se fue cambiando la cantidad de veces que
+se llamaba para los tests en los que se necesitó que se corriera 300 veces.
+
+El archivo test_tiempos_100_capacidad se usó para guardar los tiempos que
+se generaban en archivos .data. Se fue cambiando para cada uno de los
+tests, y se pueden ver sus outputs en el directorio data.
+
+Se usó jupyter con python para generar los gráficos, y se puede ver el código completo que se usó en el archivo generar-graficos.py.
