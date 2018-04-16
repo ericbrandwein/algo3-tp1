@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for i in {0..300}
+for i in {0..100}
 do
 	# $1 = cant items
 	# $2 = capacidad

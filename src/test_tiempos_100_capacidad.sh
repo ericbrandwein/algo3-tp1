@@ -1,6 +1,7 @@
 #!/bin/bash
-for i in {31..35}; do
-	filename="${i}_items_100_capacidad_sin_fuerza.data"
-	./test_tiempos.sh $i 100 > $filename
+for i in {0..25}; do
+	capacidad=$(( $i * 4))
+	filename="7_items_${capacidad}_capacidad.data"
+	./test_tiempos.sh 7 $capacidad > $filename
 	echo "outputeado $filename"
 done

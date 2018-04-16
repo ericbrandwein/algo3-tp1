@@ -26,7 +26,7 @@ int main() {
 	vector<item> items = parsear_entrada(&cant_items, &capacidad);
 	//cout << cant_items << " " << capacidad << endl;
 
-	//medir_tiempo(capacidad, items, fuerza_bruta);
+	medir_tiempo(capacidad, items, fuerza_bruta);
 	medir_tiempo(capacidad, items, meet_in_the_middle);
 	medir_tiempo(capacidad, items, backtracking);
 	medir_tiempo(capacidad, items, dinamica);
