@@ -24,9 +24,9 @@ void medir_tiempo(int capacidad, vector<item> items,
 int main() {
 	int cant_items, capacidad;
 	vector<item> items = parsear_entrada(&cant_items, &capacidad);
-	cout << cant_items << " " << capacidad << endl;
+	//cout << cant_items << " " << capacidad << endl;
 
-	medir_tiempo(capacidad, items, fuerza_bruta);
+	//medir_tiempo(capacidad, items, fuerza_bruta);
 	medir_tiempo(capacidad, items, meet_in_the_middle);
 	medir_tiempo(capacidad, items, backtracking);
 	medir_tiempo(capacidad, items, dinamica);

@@ -1,15 +1,17 @@
 \documentclass[10pt, a4paper]{article}
 \usepackage[utf8]{inputenc}
 % especifico márgenes manualmente
-\usepackage[paper=a4paper]{geometry}
+\usepackage[paper=a4paper, margin=2cm]{geometry}
 % codificación ISO-8859-1
 %\usepackage[latin1]{inputenc}
 % separación silábica en castellano
 \usepackage[spanish]{babel}
 \usepackage{algorithm}
 \usepackage{algpseudocode}
-\usepackage{tikz}
-\usepackage{tikz-qtree}
+\usepackage{graphicx}
+\graphicspath{ {images/} }
+%\usepackage{tikz}
+%\usepackage{tikz-qtree}
 %\usepackage{framed}
 %\usepackage{array}
 %\usepackage{tabular}
@@ -261,5 +263,23 @@ La última casilla de la tabla es la que utiliza todos los ítems en una mochila
 \subsection{Complejidad}
 La complejidad estará determinada por la cantidad de casillas que recorramos, y las operaciones que realicemos en cada una de esas casillas. En cada casilla, lo único que hacemos es como máximo dos consultas y una asignación a una tabla, y comparaciones, sumas y restas. Todas estas operaciones tienen complejidad $O(1)$. La cantidad de casillas que recorramos será igual a la cantidad de casillas en una tabla de $n*(W+1)$. Con estos dos datos, la complejidad resultante será $O(1) * O(n*(W+1)) = O(n*W)$.\par
 Cabe notar que este algoritmo es el único en el que la complejidad depende no solo de la cantidad de ítems en la lista, sino también en el valor de la capacidad de la mochila.
-%\end{framed}
+
+\section{Experimentación}
+Pasaremos a comparar los algoritmos entre sí con el tiempo que tarda cada uno en devolver la solución al problema en corridas reales en una computadora Toshiba Satellite L755D-S5109 con Antergos Linux. Comenzaremos con las hipótesis para cada uno, y luego las corroboraremos.\par
+Según la complejidad del algoritmo de Fuerza Bruta, el mismo debería tardar un tiempo proporcional a $2^n$. Como no nos salteamos ninguna combinación de ítems, este es el algoritmo en el que deberíamos encontrar resultados más consistentes entre el mejor y peor caso, ya que deberían ser el mismo.\par
+En el algoritmo de Meet in the Middle esperamos que mejore el tiempo promedio en comparación a Fuerza Bruta, basándonos en la complejidad, pero en este caso sí podremos encontrar peores y mejores casos diferentes, en los cuales se filtrarán más o menos conjuntos de ítems que consideremos inservibles.\par
+El de backtracking tendrá la mayor diferencia entre el peor caso y el mejor caso, ya que las podas son muy variables. En promedio, esperamos que sea mejor que el de Fuerza Bruta, y esperamos que esté aproximadamente a la par que el de Meet in the Middle, porque asumimos que podrá podar más o menos la mitad del árbol de decisiones en el caso promedio. Esperamos que cuanto antes se pueda encontrar la combinación de ítems que es la solución, antes se podrán podar todas las otras ramas, gracias a la poda de optimalidad. También esperamos que cuanto más grandes sean los ítems y mas chica la mochila, antes se encontrará la solución, por la poda de factibilidad. En este algoritmo podríamos haber implementado una poda de optimalidad diferente tal que se poden ramas más seguido, pero aumentando la complejidad del algoritmo. Veremos qué resulta de la decisión que tomamos.\par
+Finalmente, el algoritmo de Dinámica basa su complejidad no sólo en la cantidad de ítems, sino también en la capacidad de la mochila. Esto hará que, si la cantidad de ítems es muy baja y la capacidad de la mochila muy alta, se empeore el tiempo tardado en comparación a los demás algoritmos,y viceversa.\par
+
+Comenzaremos con algunos casos de prueba que parezcan apropiados para corroborar lo que dijimos.\par
+\includegraphics{capacidad100.png}
+
+El gráfico muestra el tiempo tardado en milisegundos por cada algoritmo en una escala logarítmica. Se probó cada uno con 100 combinaciones de ítems para cada cantidad de 0 a 15, con una capacidad de la mochila de 100. Los tamaños y beneficios de los ítems se generaron con una variable aleatoria de distribución uniforme de 0 a 10 inclusive.\par
+Como podemos ver, el algoritmo de Fuerza Bruta sigue bastante fielmente un crecimiento exponencial del tiempo tardado según crece la cantidad de ítems. El algoritmo de Meet in the Middle parece crecer más lentamente que los demás, hasta que se llega a los 15 ítems, en el que sobrepasa en tiempo al de dinámica, aunque este único gráfico no nos aporta suficiente información. El de Backtracking parece sostener un crecimiento exponencial constante, como el de Fuerza Bruta, y el de Dinámica se estanca en comparación a los otros después del primer salto entre 0 ítems y 1 ítem. Podemos suponer que esto se debe a que la complejidad no crece tanto con la cantidad de ítems como los otros, y que con 0 ítems la tabla que se crea es de tamaño 0, mientras que la tabla que se crea con 1 ítem es de tamaño igual a la capacidad.\par
+
+\includegraphics{capacidad100sinfuerza.png}
+
+Este gráfico es una extensión del gráfico anterior, pero omitiendo los tiempos tardados por el algoritmo de Fuerza Bruta, por ser ya demasiado grandes. Además, el hecho de aumentar la cantidad de ítems también incrementa la varianza de los resultados, así que se hace un muestreo de 300 combinaciones en vez de 100. Podemos ver que el algoritmo de dinámica casi no crece en comparación a los otros dos, y, como dijimos antes, que el de Meet in the Middle pierde la ventaja que tenía al principio después de los 15 elementos, para perder incluso contra el de Backtracking. Parecería, según los datos, que las podas del algoritmo de backtracking ganan fuerza cuanto más elementos hay, porque se puede ver un crecimiento más lento de los tiempos luego de los 20 elementos. También podemos ver que sus valores varían más, como dijimos en nuestras hipótesis. En donde no se cumplen nuestras hipótesis es en la relación entre el Backtracking y el Meet in the Middle: aunque estuvieron medianamente empatados hasta los 25 elementos, cuando se agregan más el de Backtracking mejora bastante los tiempos, tomando en cuenta de que el gráfico está en una escala logarítmica.\par
+Ahora analizaremos el incremento de tiempos para el algoritmo de Dinámica cuando crece la capacidad de la mochila.\par
+
 \end{document}
