@@ -183,26 +183,14 @@ int backtracking(int capacidad, vector<item>& items) {
 	return mejor_valor;
 }
 
-// int main() {
+int main() {
+	int capacidad, cant_items;
+	vector<item> items = parsear_entrada(&cant_items, &capacidad);
 
-//     cout << "steady_clock" << endl;
-//     cout << chrono::steady_clock::period::num << endl;
-//     cout << chrono::steady_clock::period::den << endl;
-//     cout << "steady = " << boolalpha << chrono::steady_clock::is_steady << endl << endl;
+    int solucion = backtracking(capacidad, items);
 
-// 	int capacidad, cant_items;
-// 	vector<item> items = parsear_entrada(&capacidad, &cant_items);
+    cout << solucion << endl;
 
-//     cout << endl << endl;
-//     auto startFuerzaBruta4 = chrono::steady_clock::now();
-//     int solucion = backtracking(capacidad, items);
-//     auto endFuerzaBruta4 = chrono::steady_clock::now();
-
-//     cout << solucion << endl;
-
-//     auto diffFuerzaBruta4 = endFuerzaBruta4 - startFuerzaBruta4;
-//     cout << "Tiempo utilizado por Fuerza bruta " << chrono::duration <double, milli> (diffFuerzaBruta4).count() << " ms" << endl;
-
-//     return 0;
-// }
+    return 0;
+}
 

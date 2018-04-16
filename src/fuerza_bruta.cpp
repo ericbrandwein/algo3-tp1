@@ -95,12 +95,12 @@ int fuerza_bruta(int capacidad, vector<item>& items) {
 	return mejor;
 }
 
-// int main() {
-// 	int capacidad, cant_items;
-// 	vector<item> items = parsear_entrada(&capacidad, &cant_items);
-//     int solucion = fuerza_bruta(capacidad, items);
+int main() {
+	int capacidad, cant_items;
+	vector<item> items = parsear_entrada(&cant_items, &capacidad);
+    int solucion = fuerza_bruta(capacidad, items);
 
-//     cout << solucion << endl;
-//     return 0;
-// }
+    cout << solucion << endl;
+    return 0;
+}
 
