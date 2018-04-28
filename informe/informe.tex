@@ -211,15 +211,30 @@ La poda por factibilidad es simple: mientras vamos haciendo decisiones sobre los
 \begin{algorithm}
 \begin{algorithmic}[1]
 
-\Function{podaPorFactibilidad}{$capacidad, pesoActual, nuevoItem$}
-	\State \Return $pesoActual + nuevoItem.peso \leq capacidad$
+\Function{podaPorFactibilidad}{$capacidad, tamanoActual, nuevoItem$}
+	\State \Return $tamanoActual + nuevoItem.tamano \leq capacidad$
 \EndFunction
 
 \end{algorithmic}
 \end{algorithm}
 
+La poda por optimalidad, en cambio, es un poco más elaborada. Antes de comenzar a recorrer el árbol, ordenamos los ítems de mayor a menor según el valor que toma su $beneficio/tamano$; su ``ratio". Mientras recorremos el árbol, vamos sumando los beneficios de los ítems que agregamos a la combinación. Además, cada vez que debamos tomar a una decisión, nos fijamos si llenar la capacidad restante de la mochila con un ítem hipotético que tenga el mismo ratio que el ítem actual mejora el beneficio de la mejor solución encontrada hasta el momento. Si no lo mejora, ya sabemos que cualquier combinación de ítems siguientes no superará en beneficio a la solución que habíamos encontrado antes, y por lo tanto esta rama ya no nos sirve, lo que nos hace pasar a la siguiente. Esto se calcula con el siguiente pseudocódigo:\par
 
-La poda por optimalidad, en cambio, es un poco más elaborada. Antes de comenzar a recorrer el árbol, ordenamos los ítems de mayor a menor según el valor que toma su $beneficio/tamano$; su ``ratio". Mientras recorremos el árbol, vamos sumando los beneficios de los ítems que agregamos a la combinación. Además, cada vez que debamos tomar a una decisión, nos fijamos si llenar la capacidad restante de la mochila con un ítem hipotético que tenga el mismo ratio que el ítem actual mejora el beneficio de la mejor solución encontrada hasta el momento. Si no lo mejora, ya sabemos que cualquier combinación de ítems siguientes no superará en beneficio a la solución que habíamos encontrado antes, y por lo tanto esta rama ya no nos sirve, lo que nos hace pasar a la siguiente.\par
+\begin{algorithm}
+\begin{algorithmic}[1]
+
+\Function{podaPorOptimalidad}{$capacidad, tamanoActual, beneficioActual, nuevoItem, mejorBeneficio$}
+	\State $beneficioHipotetico \gets beneficioActual$
+	\State $capacidadRestante \gets capacidad - tamanoActual$
+	\State $beneficioHipotetico += ( ratio(nuevoItem) * capacidadRestante )$
+	\State \Return $beneficioHipotetico > mejorBeneficio$
+\EndFunction
+
+\end{algorithmic}
+\end{algorithm}
+
+En la función descripta asumimos que la función \texttt{ratio} devuelve un valor infinito si el tamaño del ítem es igual a cero, y que infinito siempre es mayor a cualquier otro valor.\par
+
 Al finalizar, devolvemos el mayor beneficio que hayamos encontrado para una solución factible.\par
 Pasaremos a mostrar una corrida hipotética del algoritmo con los valores presentados en el ejemplo de la descripción del problema. La capacidad de la mochila era 25, y la lista de ítems provistos es $[(10, 5), (15, 4), (5, 13), (10, 8), (5, 8)]$, siendo un ítem una tupla $(tamano, beneficio)$.\par
 Primero, se ordena la lista por ratio, lo que nos resulta en $[(5, 13), (5, 8), (10, 8), (10, 5), (15, 4)]$. Luego, recorremos el árbol de decisiones, empezando con la decisión de que el primer ítem se encuentra en la combinación que probaremos. Agregando ese item, tomamos su tamaño y su beneficio, y los establecemos como los valores actuales de la combinación actual. Tenemos entonces 5 de tamaño y 13 de beneficio por ahora.\par
