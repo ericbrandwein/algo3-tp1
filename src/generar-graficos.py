@@ -78,8 +78,8 @@ plt.show()
 
 promedios = []
 
-for i in range(0, 101, 4):
-    nombreArchivo = "7_items_{}_capacidad.data".format(i)
+for i in range(50, 251, 4):
+    nombreArchivo = "15_items_{}_capacidad_5_peso_maximo.data".format(i)
     with open(nombreArchivo) as archivo:
         valores = archivo.read()
         valores = re.findall(r"[\w|\.]+", valores)
@@ -99,7 +99,7 @@ df = pd.DataFrame(
      'Meet in the Middle': promedios[1::4],
      'Backtracking': promedios[2::4],
     'Dinamica': promedios[3::4],
-    'Capacidad': list(range(0, 101, 4))})
-df.plot(x='Capacidad')
+    'Capacidad': list(range(50, 251, 4))})
+df.plot(x='Capacidad', logy=True)
 plt.ylabel('Tiempo (ms)')
 plt.show()
