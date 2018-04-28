@@ -70,7 +70,7 @@ En el momento en el que ya se hubieron recorrido todas las combinaciones, el res
 	\State $mayorBeneficio \gets 0$
 	\State $combinacionActual \gets $\Call{primerCombinacion}{items}
 	\While{\Call{combinacionValida?}{combinacionActual}}
-		\State $tamanioActual \gets $\Call{tamanioDeCombinacion}{combinacion}
+		\State $tamanioActual \gets $\Call{tamanioDeCombinacion}{combinacionActual}
 		\If{$tamanioActual \leq capacidad$}
 			\State $beneficioActual \gets $\Call{beneficioDeCombinacion}{combinacionActual}
 			\State $mayorBeneficio \gets max(beneficioActual, mayorBeneficio)$
