@@ -270,6 +270,8 @@ Sumando las dos complejidades independientes, resulta que tenemos una complejida
 \subsection{Descripción}
 Esta técnica de programación utiliza resultados generados anteriormente para calcular nuevos resultados, y llegar paulatinamente a la solución. En este caso, siendo $n$ la cantidad de ítems y $W$ la capacidad de la mochila, utilizaremos una tabla de datos de ancho $W + 1$ y de alto $n$. En cada casilla de esta tabla con columna $x$ y fila $y$, tendremos guardado el máximo beneficio alcanzable con una mochila de capacidad $x$ usando solamente los primeros $y$ ítems. Las columnas comenzarán en 0, por si entre los ítems hay alguno con tamaño igual a 0.\par
 Para generar esta tabla, recorreremos fila por fila hasta llegar a la última casilla. Cuando cambiamos de columna, avanzamos uno en la lista de ítems. En cada casilla, lo único que deberemos hacer es decidir si agregando el ítem actual se mejora el beneficio en comparación al máximo beneficio al que se puede llegar sin este ítem, en la capacidad reducida actual de la mochila. La idea de esta parte del algoritmo se puede ver en el siguiente pseudocódigo:\par
+
+\begin{algorithm}
 \begin{algorithmic}[1]
 \State // El máximo beneficio alcanzable si no agregamos este ítem es la posición en la tabla
 \State // correspondiente a usar un ítem menos y la misma capacidad.
@@ -288,6 +290,7 @@ Para generar esta tabla, recorreremos fila por fila hasta llegar a la última ca
 \EndIf
 \State $beneficios[itemActual][capacidadActual] = mejorBeneficio$
 \end{algorithmic}
+\end{algorithm}
 
 Este pseudocódigo no toma en cuenta el caso en el que estemos en la primer fila y no haya una anterior. En este caso lo único que hacemos es igualar el beneficio al beneficio del ítem actual, si es que el mismo entra en la capacidad reducida actual, y, si no, decimos que el beneficio es cero.\par
 Como recorremos la tabla de izquierda a derecha y luego de arriba a abajo, la fila anterior siempre está completa antes de pasar a la siguiente, y por lo tanto no tiene valores inválidos para cuando hacemos la comparación.\par
