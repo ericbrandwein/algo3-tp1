@@ -141,8 +141,9 @@ Este algoritmo toma ventaja de la búsqueda binaria para mejorar la complejidad 
 \\
 \Function{conjuntoDePartes}{$items, capacidad$}
 	\State $partes \gets \{parte(beneficio=0, tamano=0)\}$
-	\ForAll{$items$}
-		\ForAll{$partes$}
+	\ForAll{$itemActual \in items$}
+		\State $partesAnteriores \gets partes$
+		\ForAll{$parteActual \in partesAnteriores$}
 			\State $nuevaParte \gets parteActual + itemActual$
 			\If{$nuevaParte.tamano <= capacidad$}
 				\State $partes.pushBack(nuevaParte)$
@@ -155,7 +156,7 @@ Este algoritmo toma ventaja de la búsqueda binaria para mejorar la complejidad 
 \Function{sacarInservibles}{$partesOriginales$}
 
 	\State $partes \gets \{parte(beneficio=0, tamano=0)\}$
-	\ForAll{partesOriginales}
+	\ForAll{$parteActual \in partesOriginales$}
 		\State $parteAnterior \gets partes.back()$
 		\If{$parteAnterior.beneficio < parteActual.beneficio$}
 			\State $partes.pushBack(parteActual)$
@@ -174,7 +175,7 @@ Este algoritmo toma ventaja de la búsqueda binaria para mejorar la complejidad 
 \algrestore{meet}
 \Function{combinar}{$primerasPartes, segundasPartes, capacidad$}
 	\State $partesCombinadas \gets \{\}$
-	\ForAll{$primerasPartes$}
+	\ForAll{$parteActual \in primerasPartes$}
 		\State $parteResultante \gets parteActual$
 		\State $tamanoRestante \gets capacidad - parteActual.tamano$
 		\State $segundaParteComplementaria \gets$\Call{buscarParteConTamano}{$segundasPartes, tamanoRestante$}
