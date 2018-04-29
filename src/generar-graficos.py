@@ -39,7 +39,7 @@ plt.ylabel('Tiempo (ms)')
 plt.show()
 
 promedios = []
-for i in range(16):
+for i in range(15):
     nombreArchivo = "{}_items_100_capacidad.data".format(i)
     with open(nombreArchivo) as archivo:
         valores = archivo.read()
@@ -51,7 +51,7 @@ for i in range(16):
         promedios.append(promedio(valoresBacktracking))
         promedios.append(promedio(valoresDinamica))
 
-for i in range(16,31):
+for i in range(15,31):
     nombreArchivo = "{}_items_100_capacidad_sin_fuerza.data".format(i)
     with open(nombreArchivo) as archivo:
         valores = archivo.read()
