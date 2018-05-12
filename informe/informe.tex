@@ -215,7 +215,7 @@ A diferencia del algoritmo de Fuerza Bruta, para no probar con combinaciones de 
 
 \begin{algorithm}
 \begin{algorithmic}[1]
-\Function{avanzar}{capacidad, tamanoActual, beneficioActual, indiceItemActual, itemsAgregados, mejorBeneficio}
+\Function{avanzar}{capacidad, indiceItemActual, itemsAgregados, mejorBeneficio}
 	\While{hayItemDespuesDe(indiceItemActual) $\land$ \Call{podaPorOptimalidad}{capacidad, tamanoActual, beneficioActual, nuevoItem, mejorBeneficio}}
 		\State $nuevoItem \gets items[indiceItemActual]$
 		\State $itemsAgregados[indiceItemActual] \gets$ \Call{podaPorFactibilidad}{capacidad, tamanoActual, nuevoItem}
@@ -234,7 +234,7 @@ A diferencia del algoritmo de Fuerza Bruta, para no probar con combinaciones de 
 
 \begin{algorithm}
 \begin{algorithmic}[1]
-\Function{retroceder}{itemsAgregados, indiceItemActual, tamanoActual, beneficioActual}
+\Function{retroceder}{itemsAgregados, indiceItemActual}
 	\While{$indiceItemActual \geq 0 \land \lnot$ itemsAgregados[indiceItemActual]}
 		\State $indiceItemActual -= 1$
 	\EndWhile
