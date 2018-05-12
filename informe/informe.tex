@@ -37,7 +37,9 @@ El problema a resolver en este informe será el ya conocido problema de la mochi
 Dado un conjunto de $n$ ítems $S$, cada uno con un tamaño asociado $w_i$ y un beneficio asociado $p_i$, y una mochiula con una capacidad asociada $W$, encontrar el subconjunto de ítems de $S$ que maximice el beneficio total sin exceder la capacidad de la mochila. Es decir, encontrar $R \subseteq S$ tal que $\sum_{i \in R} p_i$ sea máxima y se cumpla $\sum_{i \in R} w_i \leq W$. Asumiremos que todos los valores mencionados son enteros no negativos.\par
 
 Para entender mejor el problema, mostraremos un ejemplo: \par
-Imaginemos que poseemos una mochila con capacidad 25, y que poseemos 5 ítems, cada uno con su tamaño y beneficio asociados de esta forma: \\
+Imaginemos que poseemos una mochila con capacidad 25, y que poseemos 5 ítems, cada uno con su tamaño y beneficio asociados de esta forma:
+
+\begin{center}
 \begin{tabular}{c|c|c}
 	ítem & tamaño & beneficio \\ \hline
 	1 & 10 & 5 \\
@@ -45,7 +47,9 @@ Imaginemos que poseemos una mochila con capacidad 25, y que poseemos 5 ítems, c
 	3 & 5 & 13 \\
 	4 & 10 & 8 \\
 	5 & 5 & 8
-\end{tabular} \\
+\end{tabular}
+\end{center}
+
 La combinación de ítems que maximizará el beneficio sin pasarse de la capacidad de la mochila será el conjunto $\{3, 4, 5\}$, que juntos suman un tamaño de $5 + 10 + 5 = 20$ y un beneficio de $13 + 8 + 8 = 29$. Cualquier otra combinación de los ítems que poseemos o no entrará en la mochila por tener un tamaño total mayor a la capacidad, o tendrá un beneficio total menor o igual al beneficio alcanzado con la solución dada. \par
 
 Algorítmicamente, desarrollaremos cuatro maneras de llegar a la solución para cualquier conjunto de argumentos. Demostraremos la correctitud de cada una, y luego las compararemos tanto en términos de complejidad teórica como con comprobaciones empíricas. Las estrategias de programación que utilizaremos son:
