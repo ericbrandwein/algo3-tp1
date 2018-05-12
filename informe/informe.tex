@@ -215,25 +215,37 @@ A diferencia del algoritmo de Fuerza Bruta, para no probar con combinaciones de 
 
 \begin{algorithm}
 \begin{algorithmic}[1]
-
-\Function{recorrer}{$capacidad, tamanoActual, beneficioActual, nuevoItem, mejorBeneficio$}
-	\If{\Call{podaPorOptimalidad}{$capacidad, tamanoActual, beneficioActual, nuevoItem, mejorBeneficio$}}
-		\If{\Call{podaPorFactibilidad}{$capacidad, tamanoActual, nuevoItem$}}
-			\State $beneficioConItem \gets beneficioActual + nuevoItem.beneficio$
-			\State $mejorBeneficio \gets max(beneficioConItem, mejorBeneficio)$
-
-			\If{hayItemDespuesDelNuevo}
-				\State // siguienteItem es el ítem que viene después del nuevo.
-				\State $mejorBeneficio \gets \Call{recorrer}{$capacidad, tamanoActual + nuevoItem.tamano, beneficioConItem, siguienteItem, mejorBeneficio$}$
-			\EndIf
+\Function{avanzar}{capacidad, tamanoActual, beneficioActual, indiceItemActual, itemsAgregados, mejorBeneficio}
+	\While{hayItemDespuesDe(indiceItemActual) $\land$ \Call{podaPorOptimalidad}{capacidad, tamanoActual, beneficioActual, nuevoItem, mejorBeneficio}}
+		\State $nuevoItem \gets items[indiceItemActual]$
+		\State $itemsAgregados[indiceItemActual] \gets$ \Call{podaPorFactibilidad}{capacidad, tamanoActual, nuevoItem}
+		\If{itemsAgregados[indiceItemActual]}
+			\State $tamanoActual += nuevoItem.tamano$
+			\State $beneficioActual += nuevoItem.beneficio$
 		\EndIf
-		\If{hayItemDespuesDelNuevo}
-			\State $mejorBeneficio \gets \Call{recorrer}{$capacidad, tamanoActual, beneficioActual, siguienteItem, mejorBeneficio$}$
-		\EndIf
-	\EndIf
-	\State \Return $mejorBeneficio$
+		\State // siguienteItem es el ítem que viene después del nuevo
+		\State $indiceItemActual += 1$
+	\EndWhile
+	\State \Return $indiceItemActual$
 \EndFunction
+\end{algorithmic}
+\end{algorithm}
 
+
+\begin{algorithm}
+\begin{algorithmic}[1]
+\Function{retroceder}{itemsAgregados, indiceItemActual, tamanoActual, beneficioActual}
+	\While{$indiceItemActual \geq 0 \land \lnot$ itemsAgregados[indiceItemActual]}
+		\State $indiceItemActual -= 1$
+	\EndWhile
+
+	\If{$itemsAgregados[indiceItemActual]$}
+		\State $beneficioActual -= items[indiceItemActual].beneficio$
+		\State $tamanoActual -= items[indiceItemActual].tamano$
+		\State $itemsAgregados[indiceItemActual] \gets False$
+	\EndIf
+	\State \Return indiceItemActual
+\EndFunction
 \end{algorithmic}
 \end{algorithm}
 
