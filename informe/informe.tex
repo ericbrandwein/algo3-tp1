@@ -254,11 +254,11 @@ A diferencia del algoritmo de Fuerza Bruta, para no probar con combinaciones de 
 \end{algorithmic}
 \end{algorithm}
 
-La función \texttt{avanzar}, como dice su nombre, avanza por el árbol de decisiones hasta que no hay más decisiones que hacer, o hasta que se sepa que la rama no es óptima. Cuando se descubre que la rama no es óptima, se llama a la función \texttt{retroceder}, que encuentra el último ítem que se agregó y lo saca de la nueva posible solución, restando sus valores de tamaño y beneficio del tamaño y beneficio actuales. Luego de llamar a retroceder, se llama de nuevo a avanzar, y así se sigue.\par
+La función \texttt{avanzar}, como dice su nombre, avanza por el árbol de decisiones hasta que no haya más decisiones que hacer, o hasta que se sepa que la rama no es óptima, utilizando las dos funciones de poda en el camino. Cuando se descubre que la rama no es óptima, se llama a la función \texttt{retroceder}, que encuentra el último ítem que se agregó y lo saca de la nueva posible solución, restando sus valores de tamaño y beneficio del tamaño y beneficio actuales. Luego de llamar a retroceder, se llama de nuevo a avanzar, y así se sigue.\par
 
 Estas funciones devuelven el índice del ítem actual para poder ver si es que llegaron a los extremos del árbol de decisiones. Si \texttt{retroceder} llega al índice $-1$, quiere decir que agotamos el árbol de decisiones. Si \texttt{avanzar} alcanza el último elemento, entonces se llegó a una posible solución que deberemos comparar con la mejor solución encontrada hasta el momento para quedarse con la que tenga mayor beneficio.\par
 
-La poda por factibilidad es simple: mientras vamos haciendo decisiones sobre los ítems, vamos sumando los tamaños de los que agregamos. Cuando el tamaño sumado sobrepasa la capacidad de la mochila, sabemos que esta rama no es factible, así que pasamos a la siguiente. El pseudocódigo de la función que determina si una rama es factible sería algo como lo siguiente:
+Describiremos ahora las operaciones de las funciones de poda. La poda por factibilidad es simple: mientras vamos haciendo decisiones sobre los ítems, vamos sumando los tamaños de los que agregamos. Cuando el tamaño sumado sobrepasa la capacidad de la mochila, sabemos que esta rama no es factible, así que pasamos a la siguiente. El pseudocódigo de la función que determina si una rama es factible sería algo como lo siguiente:
 
 \begin{algorithm}
 \begin{algorithmic}[1]
